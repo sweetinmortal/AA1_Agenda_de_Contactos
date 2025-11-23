@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Demo Integrante 2 + 3 — Contact Input + Contact List</title>
+  <link rel="stylesheet" href="./styles/global.css">
+  <style>
+    body{font-family:system-ui;background:#f5f7fb;margin:0;padding:18px}
+    h2{margin:0 0 12px 0}
+    .wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:420px 1fr;gap:16px;align-items:start}
+    .panel{background:#fff;padding:14px;border-radius:10px;box-shadow:0 6px 20px rgba(6,16,40,0.05)}
+    .right{display:flex;flex-direction:column;gap:12px}
+    .contact-list-holder{min-height:120px}
+    .log{font-family:monospace;font-size:0.9rem;max-height:160px;overflow:auto;padding:8px;background:#fbfdff;border-radius:8px;border:1px solid #eef6ff}
+    .hint{font-size:0.9rem;color:#556;margin-bottom:8px}
+  </style>
+</head>
+<body>
+  <h2>Demo: Contact Input (Integrante 2) + Contact List/Item (Integrante 3)</h2>
+  <p class="hint">Añade contactos en la izquierda; la lista se actualiza a la derecha. Prueba Favorito / Editar / Eliminar / Buscar.</p>
+
+  <div class="wrap">
+    <div class="panel">
+      <!-- Formulario (Integrante 2) -->
+      <contact-input></contact-input>
+    </div>
+
+    <div class="panel right">
+      <div>
+        <strong>Lista de contactos (Integrante 3)</strong>
+      </div>
+      <div id="listRoot" class="contact-list-holder"></div>
+
+      <div>
+        <strong>Eventos (log)</strong>
+        <div id="log" class="log"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    // Importa tus componentes (asegúrate de que las rutas coincidan)
+    import './components/contact-input.js';
+    import './components/contact-item.js';
+    import './components/contact-list.js';
+
+    // Element references
+    const input = document.querySelector('contact-input');
+
+    // Creamos dinámicamente el contact-list y lo añadimos al panel derecho
+    const list = document.createElement('contact-list');
+    document.getElementById('listRoot').appendChild(list);
+
+    const logEl = document.getElementById('log');
+    function log(msg){
+      const now = new Date().toLocaleTimeString();
+      logEl.textContent = `[${now}] ${msg}\n` + logEl.textContent;
+    }
+
+    // Estado local que simula el AppShell (lo ideal: AppShell real debe manejar esto)
+    let store = [
+      // seed data para demo (automáticamente puedes borrarlos)
+      { id: 's1', nombre: 'Ana Pérez', telefono: '+593984001234', email: 'ana@example.com', tags:['amigos'], favorito:false, notas:'Vecina' },
+      { id: 's2', nombre: 'Carlos Ruiz', telefono: '+593984002345', email: 'carlos@example.com', tags:['trabajo'], favorito:true, notas:'Cliente' },
+      { id: 's3', nombre: 'María Gómez', telefono: '+593984003456', email: 'maria@example.com', tags:['familia'], favorito:false, notas:'' }
+    ];
+    // Inicializar lista
+    list.contacts = store;
+
+    // ---- Conexión entre input (Integrante2) y lista (tu parte) ----
+
+    // 1) Cuando input emite contact:add -> añadimos al store y actualizamos list
+    input.addEventListener('contact:add', (e) => {
+      const c = Object.assign({}, e.detail.contact, { id: 'local_' + Date.now(), creado: (new Date()).toISOString().slice(0,7) });
+      store.unshift(c);
+      list.contacts = store;
+      log(`contact:add -> ${c.nombre} (id=${c.id})`);
+    });
+
+    // 2) Cuando input emite contact:update -> actualizamos store y list
+    input.addEventListener('contact:update', (e) => {
+      const updated = e.detail.contact;
+      const idx = store.findIndex(x => x.id === updated.id);
+      if(idx > -1){ store[idx] = updated; list.contacts = store; log(`contact:update -> ${updated.nombre} (id=${updated.id})`); }
+      else { log(`contact:update -> id no encontrado: ${updated.id}`); }
+    });
+
+    // 3) Cuando input emite filter:change -> aplicamos filtro en lista (padre)
+    input.addEventListener('filter:change', (e) => {
+      const f = Object.assign({ query:'', tags:[] }, e.detail || {});
+      list.filter = f;
+      log(`filter:change -> ${JSON.stringify(f)}`);
+    });
+
+    // 4) Escuchar eventos desde contact-list / contact-item
+    list.addEventListener('item:toggle-fav', (e) => {
+      const id = e.detail.id;
+      const c = store.find(x => x.id === id);
+      if(c){ c.favorito = !c.favorito; list.contacts = store; log(`item:toggle-fav -> id=${id} favorito=${c.favorito}`); }
+    });
+
+    list.addEventListener('item:edit', (e) => {
+      const contact = e.detail.contact;
+      // pasar al input para editar
+      input.editingContact = contact;
+      log(`item:edit -> ${contact.nombre} (id=${contact.id})`);
+    });
+
+    // item:request-delete -> permite usar modal; aquí simplemente confirmamos y emitimos item:delete
+    list.addEventListener('item:request-delete', (e) => {
+      const id = e.detail.id;
+      log(`item:request-delete -> id=${id}`);
+      if(window.confirm('¿Eliminar contacto?')) {
+        // reemitir item:delete para flujo normal
+        list.dispatchEvent(new CustomEvent('item:delete', { detail:{id}, bubbles:true, composed:true }));
+      }
+      // si quisieras un modal real, aquí harías preventDefault en el handler y abrirías app-modal
+    });
+
+    list.addEventListener('item:delete', (e) => {
+      const id = e.detail.id;
+      store = store.filter(x => x.id !== id);
+      list.contacts = store;
+      log(`item:delete -> id=${id}`);
+    });
+
+    // 5) Soporte: si AppShell (o demo) desea mostrar un contact encontrado centralmente en el input
+    // puedes probar desde consola:
+    // document.querySelector('contact-input').searchResult = store[0];
+    // o limpia: document.querySelector('contact-input').searchResult = null;
+
+    // 6) Quick helper: seed few more contacts button (opc)
+    const seedBtn = document.createElement('button');
+    seedBtn.textContent = 'Sembrar 3 contactos';
+    seedBtn.style.marginTop = '8px';
+    seedBtn.className = 'btn ghost';
+    document.getElementById('listRoot').before(seedBtn);
+    seedBtn.addEventListener('click', () => {
+      const add = [
+        { id:'s4', nombre:'Luis Ortega', telefono:'0998004455', email:'luis@x.com', tags:['colegas'], favorito:false, notas:'' },
+        { id:'s5', nombre:'Julia Castro', telefono:'0998005566', email:'julia@x.com', tags:['amigos'], favorito:false, notas:'' },
+        { id:'s6', nombre:'Pedro Alvar', telefono:'0998006677', email:'pedro@x.com', tags:['trabajo'], favorito:false, notas:'' }
+      ];
+      store = add.concat(store);
+      list.contacts = store;
+      log('Sembrados 3 contactos de prueba');
+    });
+
+    // Log inicial
+    log('Demo listo — acciones: Agregar / Buscar / Editar / Favorito / Eliminar');
+
+  </script>
+</body>
+</html>
