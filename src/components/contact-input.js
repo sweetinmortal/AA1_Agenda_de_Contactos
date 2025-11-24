@@ -91,7 +91,6 @@ tpl.innerHTML = /* html */`
     <div class="searchbar" role="search" aria-label="Buscar contactos">
       <label for="q" class="sr-only">Buscar</label>
       <input id="q" type="search" placeholder="Busca por nombre, email o teléfono" aria-label="Buscar contactos" />
-      <input id="tagsFilter" type="text" placeholder="Filtrar por tags (ej: amigos, trabajo)" aria-label="Filtrar por etiquetas" />
       <button class="btn ghost" id="btnSearch" title="Buscar">Buscar</button>
       <button class="btn ghost" id="btnClearFilters" title="Limpiar filtros">Limpiar filtros</button>
     </div>
