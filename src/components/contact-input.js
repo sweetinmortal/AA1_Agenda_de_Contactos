@@ -48,7 +48,7 @@ tpl.innerHTML = /* html */`
     form{ display:grid; gap:8px; }
     label{ font-size:0.86rem; color:var(--muted); display:block; margin-bottom:4px; }
     input[type="text"], input[type="email"], textarea{
-      width:90%; padding:8px 10px; border-radius:8px; border:1px solid #e9eef6; font-size:0.95rem;
+      width:95%; padding:8px 10px; border-radius:8px; border:1px solid #e9eef6; font-size:0.95rem;
     }
     .row{ display:flex; gap:8px; }
     .row > *{ flex:1; }
