@@ -2,17 +2,17 @@
 :root {
     /* Paleta de Colores */
     --accent: #0b74de;
-    --accent-hover: #085bb5;
+    --accent-hover: #08b508;
     --danger: #ef4444;
     --success: #10b981;
 
     /* Colores de Fondo y Texto */
-    --bg-body: #f5f7fb;
-    --bg-card: #ffffff;
-    --text-main: #1f2937;
+    --bg-body: #d4dff7;
+    --bg-card: #c6f4e9;
+    --text-main: #000000;
     --text-muted: #6b7280;
     /* Propiedades de Interfaz */
-    --radius-md: 10px;
+    --radius-md: 20px;
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     /* Tipografía */
     --font-main: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;

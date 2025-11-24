@@ -20,15 +20,15 @@ h2 {
 /* 3. Estructura de DOS COLUMNAS */
 .wrap {
     display: grid; 
-    grid-template-columns: 420px 1fr; 
+    grid-template-columns: 500px 1fr; 
     gap: 18px;
     align-items: start; 
 }
 
-/* 4. Estilos de los paneles (la caja blanca que contiene los componentes) */
+/* 4. Estilos de los paneles*/
 .panel {
     background: var(--bg-card); 
-    padding: 16px;
+    padding: 20px;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
 }
