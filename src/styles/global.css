@@ -12,9 +12,7 @@ body {
     color: var(--text-main);
     line-height: 1.5;
     min-height: 100vh;
-    /* Centrado layout principal */
-    display: flex;
-    justify-content: center;
+
 }
 
 h1, h2, h3 {

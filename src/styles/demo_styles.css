@@ -1,0 +1,55 @@
+/* src/styles/demo-styles.css - Estilos específicos para la página de prueba */
+
+/* 1. Estilos generales de la demo */
+body { 
+    padding: 30px; 
+    max-width: 1400px; 
+    margin: 0 auto; 
+}
+
+/* 2. Títulos y Párrafos */
+h2 {
+    margin: 0 0 12px 0; 
+}
+.hint {
+    font-size: 0.9rem;
+    color: var(--text-muted); 
+    margin-bottom: 16px;
+}
+
+/* 3. Estructura de DOS COLUMNAS */
+.wrap {
+    display: grid; 
+    grid-template-columns: 420px 1fr; 
+    gap: 18px;
+    align-items: start; 
+}
+
+/* 4. Estilos de los paneles (la caja blanca que contiene los componentes) */
+.panel {
+    background: var(--bg-card); 
+    padding: 16px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 5. Estilos del log de eventos */
+.log {
+    font-family: monospace;
+    font-size: 0.9rem;
+    max-height: 160px;
+    overflow: auto;
+    padding: 8px;
+    background: #fbfdff;
+    border-radius: 8px;
+    border: 1px solid #eef6ff;
+}
+.contact-list-holder{
+    min-height: 120px;
+}
