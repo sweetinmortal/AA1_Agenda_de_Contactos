@@ -117,7 +117,7 @@ tpl.innerHTML = /* html */`
       </div>
 
       <div>
-        <label for="tags">Etiquetas (coma-separadas)</label>
+        <label for="tags">Etiquetas</label>
         <input id="tags" name="tags" type="text" placeholder="amigos, trabajo" />
       </div>
 

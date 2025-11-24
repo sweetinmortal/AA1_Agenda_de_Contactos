@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Demo Integrante 2 + 3 — Contact Input + Contact List</title>
+  <title>Demo Agenda de Contactos Inteligente</title>
   <link rel="stylesheet" href="./styles/global.css">
   <link rel="stylesheet" href="./styles/demo_styles.css">
 
 </head>
 <body>
-  <h2>Demo: Contact Input (Integrante 2) + Contact List/Item (Integrante 3)</h2>
+  <h2>Agenda de Contactos Inteligente — contactos, favoritos, búsqueda.</h2>
   <p class="hint">Añade contactos en la izquierda; la lista se actualiza a la derecha. Prueba Favorito / Editar / Eliminar / Buscar.</p>
 
   <div class="wrap">
@@ -20,19 +20,19 @@
 
     <div class="panel right">
       <div>
-        <strong>Lista de contactos (Integrante 3)</strong>
+        <strong>Lista de contactos </strong>
       </div>
       <div id="listRoot" class="contact-list-holder"></div>
 
       <div>
-        <strong>Eventos (log)</strong>
+        <strong>Eventos </strong>
         <div id="log" class="log"></div>
       </div>
     </div>
   </div>
 
   <script type="module">
-    // Importa tus componentes (asegúrate de que las rutas coincidan)
+    // Importa tus componentes
     import './components/contact-input.js';
     import './components/contact-item.js';
     import './components/contact-list.js';
@@ -50,7 +50,7 @@
       logEl.textContent = `[${now}] ${msg}\n` + logEl.textContent;
     }
 
-    // Estado local que simula el AppShell (lo ideal: AppShell real debe manejar esto)
+    // Estado local que simula el AppShell 
     let store = [
       // seed data para demo (automáticamente puedes borrarlos)
       { id: 's1', nombre: 'Ana Pérez', telefono: '+593984001234', email: 'ana@example.com', tags:['amigos'], favorito:false, notas:'Vecina' },
@@ -60,7 +60,7 @@
     // Inicializar lista
     list.contacts = store;
 
-    // ---- Conexión entre input (Integrante2) y lista (tu parte) ----
+    // ---- Conexión entre input (Integrante2) y lista ----
 
     // 1) Cuando input emite contact:add -> añadimos al store y actualizamos list
     input.addEventListener('contact:add', (e) => {
@@ -107,7 +107,6 @@
         // reemitir item:delete para flujo normal
         list.dispatchEvent(new CustomEvent('item:delete', { detail:{id}, bubbles:true, composed:true }));
       }
-      // si quisieras un modal real, aquí harías preventDefault en el handler y abrirías app-modal
     });
 
     list.addEventListener('item:delete', (e) => {
@@ -118,25 +117,25 @@
     });
 
     // 5) Soporte: si AppShell (o demo) desea mostrar un contact encontrado centralmente en el input
-    // puedes probar desde consola:
+    // puede probar desde consola:
     // document.querySelector('contact-input').searchResult = store[0];
     // o limpia: document.querySelector('contact-input').searchResult = null;
 
-    // 6) Quick helper: seed few more contacts button (opc)
+    // 6) Ayuda rapida: añade un boton para agregar más contactos
     const seedBtn = document.createElement('button');
-    seedBtn.textContent = 'Sembrar 3 contactos';
+    seedBtn.textContent = 'Agregar 3 contactos';
     seedBtn.style.marginTop = '8px';
     seedBtn.className = 'btn ghost';
     document.getElementById('listRoot').before(seedBtn);
     seedBtn.addEventListener('click', () => {
       const add = [
-        { id:'s4', nombre:'Luis Ortega', telefono:'0998004455', email:'luis@x.com', tags:['colegas'], favorito:false, notas:'' },
-        { id:'s5', nombre:'Julia Castro', telefono:'0998005566', email:'julia@x.com', tags:['amigos'], favorito:false, notas:'' },
-        { id:'s6', nombre:'Pedro Alvar', telefono:'0998006677', email:'pedro@x.com', tags:['trabajo'], favorito:false, notas:'' }
+        { id:'s4', nombre:'Luis Ortega', telefono:'0998004455', email:'luis@hotmail.com', tags:['colegas'], favorito:false, notas:'' },
+        { id:'s5', nombre:'Julia Castro', telefono:'0998005566', email:'julia@gmail.com', tags:['amigos'], favorito:false, notas:'' },
+        { id:'s6', nombre:'Pedro Alvar', telefono:'0998006677', email:'pedro@gmail.com', tags:['trabajo'], favorito:false, notas:'' }
       ];
       store = add.concat(store);
       list.contacts = store;
-      log('Sembrados 3 contactos de prueba');
+      log('Agregar 3 contactos de prueba');
     });
 
     // Log inicial
