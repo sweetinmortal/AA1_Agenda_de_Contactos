@@ -1,5 +1,5 @@
 // --- Clave única para localStorage ---
-export const STORAGE_KEY = 'contacts.v1';
+export const STORAGE_KEY = 'agenda_inteligente_contacts_v1';
 
 // --- API compatible con el Storage original ---
 export const Storage = {
@@ -105,3 +105,4 @@ export default {
     saveContacts,
     seedData
 };
+
