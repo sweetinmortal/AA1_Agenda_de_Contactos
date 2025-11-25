@@ -38,3 +38,17 @@ Implementó los componentes **`contact-item`** y **`contact-list`**, responsable
 - Lógica de filtrado por nombre, email, teléfono y etiquetas, además de ordenar favoritos primero.
 - Render reactivo con actualización automática cuando cambia la lista o los filtros.
 - Archivo **demo_input.html** para pruebas, sin modificar el `index.html` del Integrante 1.
+
+### **Integrante 4 - Camila Maldonado**
+
+Implementó los componentes **`stats-card`**, **`app-modal`** y el módulo de utilidades **`storage`**, encargados de mostrar estadísticas, manejar modales reutilizables y gestionar la persistencia local de contactos. Sus aportes incluyen:
+
+- Implementación de funciones en **`storage`**:
+    - `getContacts()`: Obtiene los contactos desde localStorage.
+    - `saveContacts(contacts)`: Guarda cambios en persistencia.
+    - `seedData(force=false)`: Carga datos iniciales sin afectar los existentes (a menos que se fuerce).
+- Creación de **`stats-card`**, que realiza:
+    - Implementación con Shadow DOM, estilos encapsulados y diseño responsivo.
+    - Calculos dinámicos de las estadísticas del total de contactos, porcentaje de favoritos y listado de top tags.
+- Creación de **`app-modal`**, el cual es un componente modal reutilizable con Shadow DOM y estilos modernos, este se encarga de emitir eventos personalizados (`modal:confirm`, `modal:close`).
+- Creación del Diagrama de Comunicación en README.
