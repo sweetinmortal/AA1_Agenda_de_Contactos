@@ -118,3 +118,50 @@
     - El archivo demo sirve únicamente para validar que los componentes funcionan.
     - Permite comprobar favoritos, edición, filtros y eliminación.
     - Comunicación real entre componentes hijo → hijo y padre simulado.
+
+# Aportes Integrante 4 – Camila Maldonado
+
+1. Creación del módulo `storage.js`, encargado del manejo centralizado de datos, incluyendo:
+    - Persistencia local mediante `localStorage`.
+    - Gestión de la lista completa de contactos:
+        - `loadContacts()`
+        - `saveContacts()`
+        - `addContact()`
+        - `updateContact()`
+        - `deleteContact()`
+    - Sincronización reactiva entre componentes mediante eventos personalizados:
+        - `storage:updated`
+    - Aislamiento total de la capa de datos para facilitar mantenimiento y escalabilidad.
+    - Diseño independiente del DOM: el módulo funciona sin depender de ningún componente visual.
+
+2. Implementación del componente `app-modal`, responsable de la ventana modal genérica del proyecto, incluyendo:
+    - Ventana modal reutilizable basada en Web Components.
+    - Uso obligatorio de Shadow DOM con estilos encapsulados.
+    - Slots para contenido (`default`) y acciones (`slot="actions"`).
+    - Métodos públicos:
+        - `open()`
+        - `close()`
+    - Eventos personalizados:
+        - `modal:open`
+        - `modal:close`
+        - `modal:confirm`
+    - Animaciones suaves (`fade-in` / `fade-out`) y bloqueo de interacción del fondo mediante un overlay oscuro.
+    - Cierre automático al hacer clic fuera del modal o presionar botones de acción.
+    - Integración prevista para confirmaciones de eliminación, edición u operaciones críticas.
+
+3. Creación del componente `stats-card`, encargado de mostrar estadísticas globales de los contactos, incluyendo:
+    - Recepción de datos mediante propiedades públicas (`contacts`).
+    - Cálculo automático de indicadores:
+        - Total de contactos.
+        - Total de favoritos.
+        - Total de contactos por etiqueta.
+    - Renderizado reactivo cuando cambian los datos.
+    - Uso de Shadow DOM y estilos internos tipo tarjeta informativa.
+    - Componentización modular para su uso dentro de AppShell o demos aisladas.
+    - Preparado para integrarse con `storage.js` y actualizarse dinámicamente ante cambios.
+
+4. Validación funcional en archivo demo, permitiendo probar:
+    - `storage.js` sin AppShell.
+    - Apertura y cierre del modal con contenido de prueba.
+    - Cálculo y despliegue de estadísticas en stats-card.
+    - Manejo de eventos y comunicación entre módulos.
