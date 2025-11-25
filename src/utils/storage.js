@@ -1,7 +1,47 @@
+// --- Clave única para localStorage ---
 export const STORAGE_KEY = 'contacts.v1';
 
+// --- API compatible con el Storage original ---
+export const Storage = {
+    get(key) {
+        try {
+            const raw = localStorage.getItem(key);
+            if (!raw) return null;
+            return JSON.parse(raw);
+        }
+        catch (err) {
+            console.error("Storage.get error", err);
+            return null;
+        }
+    },
+
+    set(key, value) {
+        try {
+            localStorage.setItem(key, JSON.stringify(value));
+        }
+        catch (err) {
+            console.error("Storage.set error", err);
+        }
+    },
+
+    remove(key) {
+        try { 
+            localStorage.removeItem(key); 
+        }
+        catch (err) {
+            console.error("Storage.remove error", err);
+        }
+    }
+};
+
+// --- Funciones nuevas compatibles con AppShell ---
 function safeParse(json, fallback = []) {
-    try { return JSON.parse(json) || fallback; } catch(e) { return fallback; }
+    try {
+        return JSON.parse(json) || fallback;
+    }
+    catch (e) {
+        return fallback;
+    }
 }
 
 export function getContacts() {
@@ -10,31 +50,43 @@ export function getContacts() {
 }
 
 export function saveContacts(contacts) {
-    if (!Array.isArray(contacts)) throw new Error('contacts must be an array');
+    if (!Array.isArray(contacts)) {
+        throw new Error("contacts must be an array");
+    }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(contacts));
 }
 
-/*
- * seedData() -> guarda 20 contactos de ejemplo si no hay datos.
- * Devuelve el array final.
- */
-
+// --- Seed data opcional para demo ---
 export function seedData(force = false) {
     let existing = getContacts();
+
     if (existing.length > 0 && !force) return existing;
 
-    const tags = ['amigos','trabajo','familia','gym','escuela','proveedores','freelance'];
-    const sample = [];
-    const month = (n) => `2023-${String(n).padStart(2,'0')}`;
+    const tags = [
+        "amigos",
+        "trabajo",
+        "familia",
+        "gym",
+        "escuela",
+        "proveedores",
+        "freelance"
+    ];
 
-    for (let i=1;i<=20;i++){
+    const sample = [];
+    const month = (n) => `2023-${String(n).padStart(2, "0")}`;
+
+    for (let i = 1; i <= 20; i++) {
         const id = crypto?.randomUUID?.() ?? `id-${Date.now()}-${i}`;
+
         sample.push({
             id,
             nombre: `Contacto ${i}`,
             telefono: `099${100000 + i}`,
             email: `contacto${i}@ejemplo.com`,
-            tags: [tags[i % tags.length], (i % 4 === 0) ? 'amigos' : tags[(i+1) % tags.length]],
+            tags: [
+                tags[i % tags.length],
+                i % 4 === 0 ? "amigos" : tags[(i + 1) % tags.length]
+            ],
             favorito: i % 5 === 0,
             notas: `Nota de ejemplo para contacto ${i}`,
             creado: month((i % 12) + 1)
@@ -44,3 +96,12 @@ export function seedData(force = false) {
     saveContacts(sample);
     return sample;
 }
+
+// Exportación por defecto opcional para compatibilidad
+export default {
+    STORAGE_KEY,
+    Storage,
+    getContacts,
+    saveContacts,
+    seedData
+};
