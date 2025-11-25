@@ -15,13 +15,29 @@ npx http-server -c-1  # o python -m http.server 8000
 ```
 
 ## Diagrama de Comunicación
-[<contact-input>] --(contact:add)--> [<app-dashboard>] --(update state)-> [<contact-list>]
-                                             |
-                                             +--(prop contacts)-> [<stats-card>]
-[<contact-item>] --(item:toggle-fav)--> [<contact-list>] --(bubbles)-> [<app-dashboard>]
-[<contact-input>] --(filter:change)--> [<app-dashboard>] --(prop filter)-> [<contact-list>]
-[<app-modal>] <--(prop open)-- [<app-dashboard>]
-Events: contact:add, contact:update, contact:delete, filter:change, item:toggle-fav, stats:drilldown, modal:confirm
+```bash
+<contact-input>
+        |--(contact:add)----------------------> [<app-dashboard>]
+        |                                          |
+        |                                          +--(update state)--> [<contact-list>]
+        |                                          |
+        |                                          +--(prop contacts)--> [<stats-card>]
+        |
+        |--(filter:change)---------------------> [<app-dashboard>]
+                                                   |
+                                                   +--(prop filter)----> [<contact-list>]
+
+
+[<contact-item>]
+        |--(item:toggle-fav / item:edit / item:delete)-->
+                               |
+                               v
+                       [<contact-list>] --(bubbles events)--> [<app-dashboard>]
+
+
+[<app-modal>]
+        ^--(prop open)--------------------------- [<app-dashboard>]
+```
 
 ### **Integrante 2 – Dalinda Molina**
 
