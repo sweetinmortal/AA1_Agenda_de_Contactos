@@ -13,6 +13,16 @@ Archivos implementados y entregados por Integrante 1:
 cd src
 npx http-server -c-1  # o python -m http.server 8000
 ```
+
+## Diagrama de Comunicación
+[<contact-input>] --(contact:add)--> [<app-dashboard>] --(update state)-> [<contact-list>]
+                                             |
+                                             +--(prop contacts)-> [<stats-card>]
+[<contact-item>] --(item:toggle-fav)--> [<contact-list>] --(bubbles)-> [<app-dashboard>]
+[<contact-input>] --(filter:change)--> [<app-dashboard>] --(prop filter)-> [<contact-list>]
+[<app-modal>] <--(prop open)-- [<app-dashboard>]
+Events: contact:add, contact:update, contact:delete, filter:change, item:toggle-fav, stats:drilldown, modal:confirm
+
 ### **Integrante 2 – Dalinda Molina**
 
 Implementó el componente **`contact-input`**, encargado de crear, editar y buscar contactos. Sus aportes incluyen:
