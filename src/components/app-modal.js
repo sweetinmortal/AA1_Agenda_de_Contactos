@@ -88,8 +88,9 @@ export class AppModal extends HTMLElement {
             this._panel.setAttribute('aria-hidden', String(!isOpen));
             document[ isOpen ? 'addEventListener' : 'removeEventListener' ]('keydown', this._onKey);
         }
-        if (name === 'title'){
-            const slot = this.shadowRoot.querySelector('slot[name="title"]');
+        if (name === 'title') {
+            const h3 = this.shadowRoot.querySelector('#title');
+            if (h3) h3.textContent = newV;
         }
     }
 
@@ -106,5 +107,6 @@ export class AppModal extends HTMLElement {
         this.dispatchEvent(new CustomEvent('modal:close',{bubbles:true,composed:true}));
     }
 }
+
 
 customElements.define('app-modal', AppModal);
