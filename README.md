@@ -123,3 +123,21 @@ Implementó los componentes **`stats-card`**, **`app-modal`** y el módulo de ut
     - Calculos dinámicos de las estadísticas del total de contactos, porcentaje de favoritos y listado de top tags.
 - Creación de **`app-modal`**, el cual es un componente modal reutilizable con Shadow DOM y estilos modernos, este se encarga de emitir eventos personalizados (`modal:confirm`, `modal:close`).
 - Creación del Diagrama de Comunicación en README.
+
+### **Integrante 5 - David Saraguro**
+
+1. Implementación de la **Arquitectura de Estilos Globales**, encargada de unificar la identidad visual del proyecto:
+    - Creación de `src/styles/variables.css` para definir **Design Tokens** (colores, espaciados, sombras, tipografía).
+    - Creación de `src/styles/global.css` para establecer el **CSS Reset**, estilos base del `body` y tipografía general.
+    - Configuración de variables CSS (`:root`) diseñadas para traspasar el Shadow DOM y ser consumidas por los componentes hijos.
+
+2. Integración y **Corrección de Layout en Entornos de Prueba**:
+    - Creación de `src/styles/demo-styles.css`, resolviendo la visualización en columnas del archivo `demo_input.html`.
+    - Implementación de **Grid Layout** responsivo para dividir la pantalla entre el formulario (Integrante 2) y la lista (Integrante 3).
+    - Eliminación de estilos *inline* y vinculación correcta de hojas de estilo en `src/index.html`.
+
+3. Gestión de **Documentación y Entregables Finales**:
+    - Organización de la carpeta `src/assets/` e inclusión de recursos gráficos.
+    - Redacción completa del **Informe Técnico (PDF)**, cubriendo arquitectura, objetivos y lecciones aprendidas.
+    - Diseño del **Diagrama de Comunicación** (Flujo de datos) para el informe y el README.
+    - Recopilación y edición del **Video Demostrativo** final para la entrega en Moodle.

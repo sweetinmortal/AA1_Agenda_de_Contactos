@@ -215,3 +215,51 @@
     - Apertura y cierre del modal con contenido de prueba.
     - Cálculo y despliegue de estadísticas en stats-card.
     - Manejo de eventos y comunicación entre módulos.
+
+¡Entendido! Aquí tienes los **Commits para el Integrante 5** siguiendo exactamente el mismo estilo visual (encabezados en negrita y mensajes en formato `code` negrita) que usó tu compañera Dalinda (Integrante 2).
+
+Copia y pega esto en tu archivo de commits:
+
+---
+
+# Aportes Integrante 5 - David Saraguro
+
+### **1. Definir variables globales de diseño**
+
+**`feat(styles): create variables.css with global color palette and design tokens`**
+
+---
+
+### **2. Implementar estilos base y reset**
+
+**`style(global): add global.css for css reset, typography and body layout`**
+
+---
+
+### **3. Agregar assets y logo del proyecto**
+
+**`feat(assets): add project logo.svg and organize public assets structure`**
+
+---
+
+### **4. Corregir layout en archivo de prueba (Demo)**
+
+**`fix(demo): create demo-styles.css to fix grid layout in demo_input.html`**
+
+---
+
+### **5. Vincular estilos en la página principal**
+
+**`chore(index): link global styles and verify visual consistency in AppShell`**
+
+---
+
+### **6. Agregar documentación técnica final**
+
+**`docs(pdf): add final technical report with architecture diagram and objectives`**
+
+---
+
+### **7. Actualizar entregables y enlaces**
+
+**`docs(readme): update readme with team roles, video link and execution steps`**

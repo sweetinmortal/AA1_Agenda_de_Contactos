@@ -25,3 +25,28 @@ button {
     font-family: inherit;
     cursor: pointer;
 }
+
+/* Estilos para el logo y la cabecera */
+.app-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0 16px;
+}
+
+.app-logo {
+    width: 32px;
+    height: 32px;
+}
+
+.app-title {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--accent, #0b74de);
+}
