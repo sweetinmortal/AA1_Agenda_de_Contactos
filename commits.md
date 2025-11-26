@@ -1,3 +1,52 @@
+# Aportes Integrante 1 - Anthony León
+
+### **#1. Configurar estructura base del proyecto**
+
+**`chore(repo): agregar LICENSE, .gitignore y estructura base del proyecto`**
+
+---
+
+### **2. Crear AppShell con estado global y propiedades públicas**
+
+**`feat(app-shell): crear AppShell con estado global y propiedades públicas para compartir datos`**
+
+---
+
+### **3. Implementar persistencia con localStorage**
+
+**`feat(app-shell): implementar persistencia de contactos usando storage.js y localStorage`**
+
+---
+
+### **4. Implementar handlers de eventos globales**
+
+**`feat(app-shell): implementar handlers para agregar, editar y eliminar contactos`**
+
+---
+
+### **5. Crear src/index.html y src/main.js**
+
+**`feat(setup): crear index.html y main.js para el registro de componentes`**
+
+---
+
+### **6. Documentar la ejecución del proyecto en README**
+
+**`docs(readme): agregar sección "Cómo ejecutar" con pasos de instalación y ejecución`**
+
+---
+
+### **7. Preparar despliegue en GitHub Pages**
+
+**`chore(deploy): agregar script gh-pages e instrucciones de despliegue`**
+
+---
+
+### **8. Crear rama de trabajo**
+
+**`chore(git): crear rama feature/ig1-appshell`**
+
+
 # Aportes Integrante 2 - Dalinda Molina
 ### **1. Crear componente base**
 
