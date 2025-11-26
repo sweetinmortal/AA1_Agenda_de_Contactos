@@ -38,6 +38,51 @@ npx http-server -c-1  # o python -m http.server 8000
 [<app-modal>]
         ^--(prop open)--------------------------- [<app-dashboard>]
 ```
+### **Integrante 1 – Anthony León**
+Implementación: 
+- AppShell con propiedades públicas.
+- Persistencia con localStorage.
+- Registro de componentes en main.js.
+
+**Estructura inicial del proyecto**
+Creacion de la carpeta base del proyecto:
+- agenda_inteligente/
+- Definió la estructura principal de carpetas:
+        - src/
+        - components/
+        - utils/
+        - styles/
+        - assets/
+
+**Lógica Global de la Aplicación**
+Implementacion del archivo:
+- src/app-shell.js
+
+**Persistencia de Datos**
+Se encargo de:
+- Guardar los contactos en localStorage
+- Recuperar los contactos al iniciar la app
+- Sincronizar automáticamente los cambios del estado
+
+**Inicialización del Proyecto**
+Implementacion:
+src/main.js
+Registro de todos los Web Components
+Inicialización de <app-dashboard>
+Conexión entre la AppShell y los demás componentes
+
+**Estructura HTML base**
+Implementacion:
+- src/index.html
+- Contenedor principal de la aplicación
+- Carga del main.js como módulo
+- Punto de arranque del sistema
+
+  ---
+
+
+
+
 
 ### **Integrante 2 – Dalinda Molina**
 
